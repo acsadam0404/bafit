@@ -1,0 +1,42 @@
+buildscript {
+	repositories {
+		maven { url "http://repo.spring.io/libs-release" }
+		mavenLocal()
+		mavenCentral()
+	}
+	dependencies { classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.9.RELEASE") }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'spring-boot'
+apply plugin: 'scala'
+
+sourceSets {
+	main {
+		java { srcDirs = ["src/main/java"]}
+		scala { srcDirs = ["src/main/scala", "src/test/scala"]}
+	}
+}
+
+jar {
+	baseName = 'bafit-server'
+	version =  '0.1.0-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+	maven { url "http://repo.spring.io/libs-release" }
+}
+
+dependencies {
+	compile "org.springframework.boot:spring-boot-starter-web"
+	compile 'org.scala-lang:scala-library:2.11.1'
+	testCompile "junit:junit"
+}
+
+task wrapper(type: Wrapper) { gradleVersion = '2.2.1' }
+
